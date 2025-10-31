@@ -1,19 +1,20 @@
 import "./App.css";
+import React, { useState } from "react";
+import Counter from "./Counter";
+
 function App() {
-  function callFun() {
-    alert("You clicked me!");
-  }
-  const fruit = (name) => {
-    alert(name);
+  const [fruit, setFruit] = useState("Apple");
+
+  const handleClick = () => {
+    setFruit("Banana");
   };
   return (
-    <>
-      <div>
-        <h1>JavaScript Click Events</h1>
-        <button onClick={() => fruit("Apple")}>Apple</button>
-        <button onClick={() => fruit("Banana")}>Banana</button>
-      </div>
-    </>
+    <div>
+      <h1>State in React JS</h1>
+      <h2>{fruit}</h2>
+      <button onClick={handleClick}>Change Full Name</button>
+      <Counter />
+    </div>
   );
 }
 export default App;
