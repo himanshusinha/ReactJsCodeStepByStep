@@ -1,16 +1,24 @@
 import "./App.css";
 import React, { useState } from "react";
 function App() {
-  const [show, setShow] = useState(true);
-
-  const handleClick = () => {
-    setShow(!show);
-  };
+  const [count, setCount] = useState(0);
   return (
     <div>
-      <h1>Toggle in React JS</h1>
-      <h2>{show ? "Himanshu Sinha" : null}</h2>
-      <button onClick={handleClick}>Toggle</button>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Count</button>
+      {count == 0 ? (
+        "condition 0"
+      ) : count == 1 ? (
+        "condition 1"
+      ) : count == 2 ? (
+        "condition 2"
+      ) : count == 3 ? (
+        "condition 3"
+      ) : count == 4 ? (
+        "condition 4"
+      ) : (
+        <h1>Other Condition</h1>
+      )}
     </div>
   );
 }
