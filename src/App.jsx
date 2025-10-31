@@ -1,19 +1,16 @@
 import "./App.css";
 import React, { useState } from "react";
-import Counter from "./Counter";
-
 function App() {
-  const [fruit, setFruit] = useState("Apple");
+  const [show, setShow] = useState(true);
 
   const handleClick = () => {
-    setFruit("Banana");
+    setShow(!show);
   };
   return (
     <div>
-      <h1>State in React JS</h1>
-      <h2>{fruit}</h2>
-      <button onClick={handleClick}>Change Full Name</button>
-      <Counter />
+      <h1>Toggle in React JS</h1>
+      <h2>{show ? "Himanshu Sinha" : null}</h2>
+      <button onClick={handleClick}>Toggle</button>
     </div>
   );
 }
