@@ -1,45 +1,30 @@
-import { useState } from "react";
-import "./App.css";
+import College from "./College";
 
 function App() {
-  const [gender, setGender] = useState("male");
-  const [city, setCity] = useState("indore");
+  const collegeData = [
+    { name: "SGSITS Indore", city: "Indore", website: "sgsit.com" },
+    { name: "DAVV Indore", city: "Indore", website: "davv.com" },
+    { name: "MEDICAPS Indore", city: "Indore", website: "medicaps.com" },
+  ];
+
   return (
     <div>
-      <h1>Handle Checkbox in ReactJS</h1>
-      <h4>Select Gender</h4>
-      <input
-        value={"male"}
-        type="radio"
-        id="male"
-        name="gender"
-        checked={gender == "male"}
-        onChange={(event) => setGender(event.target.value)}
-      />
-      <label htmlFor="gender">Male</label>
-      <input
-        value={"female"}
-        type="radio"
-        id="female"
-        name="gender"
-        checked={gender == "female"}
-        onChange={(event) => setGender(event.target.value)}
-      />
-      <label htmlFor="gender">Female</label>
-      <h2>Selected Gender : {gender}</h2>
-      <br />
-      <br />
-      <h4>Select City :</h4>
-      <select
-        defaultValue="indore"
-        onChange={(event) => setCity(event.target.value)}
-      >
-        <option value="indore">indore</option>
-        <option value="ujjain">ujjain</option>
-        <option value="dewas">dewas</option>
-      </select>
-      <h2>Selected City : {city}</h2>
+      <h1>Loop in JSX with Map Function</h1>
+      <div>
+        {collegeData.map((college, index) => {
+          return (
+            <div key={index}>
+              <College
+                name={college.name}
+                city={college.city}
+                website={college.website}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
+
 export default App;
