@@ -1,23 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
-function Counter() {
-  const [increaseCount, setIncreaseCount] = useState(0);
-  const [decreaseCount, setDecreaseCount] = useState(10);
-
-  const handleIncreaseCount = () => {
-    setIncreaseCount(increaseCount + 1);
+const Counter = ({ count, data }) => {
+  const handleCounter = () => {
+    console.log("handleCounter called");
   };
 
-  const handleDecreaseCount = () => {
-    setDecreaseCount(decreaseCount - 1);
+  const handleData = () => {
+    console.log("handleData called");
   };
+
+  useEffect(() => {
+    handleCounter();
+  }, []);
+
+  useEffect(() => {
+    handleData();
+  }, [data]);
+
   return (
     <div>
-      <h1>Increase Count : {increaseCount}</h1>
-      <h1>Decrease Count : {decreaseCount}</h1>
-      <button onClick={handleIncreaseCount}>Increase Count</button>
-      <button onClick={handleDecreaseCount}>Decrease Count</button>
+      <h1>Counter Value :{count}</h1>
+      <h1>Data Value :{data}</h1>
     </div>
   );
-}
+};
+
 export default Counter;
