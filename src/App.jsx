@@ -1,28 +1,28 @@
-import College from "./College";
-
+import { useEffect, useState } from "react";
+import "./App.css";
 function App() {
-  const collegeData = [
-    { name: "SGSITS Indore", city: "Indore", website: "sgsit.com" },
-    { name: "DAVV Indore", city: "Indore", website: "davv.com" },
-    { name: "MEDICAPS Indore", city: "Indore", website: "medicaps.com" },
-  ];
+  /* 
+   useEffect(()=>{
+    // This code is will run on mount
+    },[])
 
+    useEffect(()=>{
+    // This code is will run on update
+    },[])
+
+    useEffect(()=>{
+      return()=>{
+        // This code is will run on unmount
+      }
+    },[])
+
+    useEffect(()=>{
+      // This code will run on every life cycle event
+      })
+  */
   return (
     <div>
-      <h1>Loop in JSX with Map Function</h1>
-      <div>
-        {collegeData.map((college, index) => {
-          return (
-            <div key={index}>
-              <College
-                name={college.name}
-                city={college.city}
-                website={college.website}
-              />
-            </div>
-          );
-        })}
-      </div>
+      <h1>Life Cycle in React JS</h1>
     </div>
   );
 }
