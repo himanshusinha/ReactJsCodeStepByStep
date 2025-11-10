@@ -1,22 +1,32 @@
-import { useRef } from "react";
 import "./css/style.css";
-import UserInput from "./UserInput";
-
+import { useFormStatus } from "react-dom";
 function App() {
-  const inputRef = useRef();
-
-  const handleInput = () => {
-    inputRef.current.focus();
-    inputRef.current.value = "1000";
-    inputRef.current.style.color = "red";
+  const handleSubmit = async () => {
+    await new Promise((res) => setTimeout(res, 5000));
+    console.log("submitted");
   };
-
+  const CustomerForm = () => {
+    const { pending } = useFormStatus();
+    console.log(pending);
+    return (
+      <div>
+        <h1>useFormStatus Hook in React JS 19</h1>
+        <input type="text" placeholder="Enter name" />
+        <br />
+        <br />
+        <input type="password" placeholder="Enter password" />
+        <br />
+        <br />
+        <button type="submit" disabled={pending}>
+          {pending ? "Submitting..." : "Submit"}
+        </button>
+      </div>
+    );
+  };
   return (
-    <div>
-      <h1>Forward Ref in React JS</h1>
-      <UserInput ref={inputRef} />
-      <button onClick={handleInput}>Submit</button>
-    </div>
+    <form action={handleSubmit}>
+      <CustomerForm />
+    </form>
   );
 }
 
