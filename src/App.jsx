@@ -1,45 +1,36 @@
+import { useRef } from "react";
 import "./css/style.css";
-import { Alert, Button } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+
 function App() {
+  const inputRef = useRef();
+  const h1Ref = useRef();
+  const inputHandler = () => {
+    console.log("input ref value");
+    inputRef.current.focus();
+    inputRef.current.style.color = "red";
+    inputRef.current.placeholder = "Enter password";
+    inputRef.current.value = "123";
+  };
+  const h1Handler = () => {
+    h1Ref.current.style.color = "green";
+  };
+  const toggleHandler = () => {
+    if (inputRef.current.style.display !== "none") {
+      inputRef.current.style.display = "none";
+    } else {
+      inputRef.current.style.display = "inline";
+    }
+  };
+
   return (
     <div>
-      <h1 className="heading">Add BootStrap in ReactJS</h1>
-
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <Alert variant="success">This is a success alert—check it out!</Alert>
-      <Button variant="warning">Ok</Button>
-      <Button variant="danger">Ok</Button>
-      <Button variant="success">Ok</Button>
+      <h1>useRef in ReactJS</h1>
+      <button onClick={inputHandler}>Change Value</button>
+      <input ref={inputRef} type="text" placeholder="Enter your name" />
+      <button onClick={toggleHandler}>Toggle Visibility</button>
+      <h1 ref={h1Ref}>React JS</h1>
+      <button onClick={h1Handler}>Change h1 Style</button>
     </div>
   );
 }
-
 export default App;
