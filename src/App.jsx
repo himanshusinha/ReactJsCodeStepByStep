@@ -1,15 +1,34 @@
 import { useState } from "react";
-import AddUser from "./AddUser";
 import "./css/style.css";
-import DisplayUser from "./DisplayUser";
 function App() {
-  const [user, setUser] = useState("");
-
+  const [data, setData] = useState({
+    name: "Anil",
+    address: {
+      city: "Delhi",
+      country: "India",
+    },
+  });
+  const handleData = (val) => {
+    data.name = val;
+    setData({ ...data });
+  };
+  const handleCity = (city) => {
+    console.log(city);
+    data.address.city = city;
+    setData({ ...data, address: { ...data.address } });
+  };
   return (
     <div>
-      <h1>Lifting State Up in ReactJS 19</h1>
-      <AddUser setUser={setUser} />
-      <DisplayUser user={user} />
+      <h1>Updating Objects in ReactJS 19</h1>
+      <input
+        type="text"
+        placeholder="Entery name"
+        onChange={(event) => handleData(event.target.value)}
+      />
+      <h2>Name: {data.name}</h2>
+      <h2>City: {data.address.city}</h2>
+      <h2>Country: {data.address.country}</h2>
+      <input type="text" onChange={(event) => handleCity(event.target.value)} />
     </div>
   );
 }
