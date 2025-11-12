@@ -1,62 +1,47 @@
-import { useState } from "react";
+import { useActionState } from "react";
 import "./css/style.css";
+
 function App() {
-  const [data, setData] = useState(["sam", "peter", "bob"]);
-  const [dataDetails, setDataDetails] = useState([
-    {
-      name: "sam",
-      age: 24,
-    },
-    {
-      name: "peter",
-      age: 33,
-    },
-    {
-      name: "bob",
-      age: 36,
-    },
-  ]);
-  const handleData = (name) => {
-    data[data.length - 1] = name;
-    console.log(data);
-    setData([...data]);
+  const handleSubmit = async (previousData, formData) => {
+    const name = formData.get("name");
+    const password = formData.get("password");
+    console.log("handleSubmit data", name, password);
+    await new Promise((res) => setTimeout(res, 3000));
+
+    if (name && password) {
+      return { message: "Data Submitted", name, password };
+    } else {
+      return { error: "Failed to Submit. Enter proper data" };
+    }
   };
-  const handleDataDetails = (age) => {
-    dataDetails[dataDetails.length - 1].age = age;
-    console.log(dataDetails);
-    setDataDetails([...dataDetails]);
-  };
+
+  const [data, action, pending] = useActionState(handleSubmit, {});
+
+  console.log("Form state:", data);
+
   return (
     <div>
-      <h1>Updating Array in ReactJS 19</h1>
-      <input
-        type="text"
-        placeholder="enter your name"
-        onChange={(e) => handleData(e.target.value)}
-      />
-      {data.map((item, index) => {
-        return (
-          <h3 key={index}>
-            <item>{item}</item>
-          </h3>
-        );
-      })}
-      <hr />
-      <input
-        type="text"
-        placeholder="enter your age"
-        onChange={(e) => handleDataDetails(e.target.value)}
-      />
-      {dataDetails.map((item, index) => {
-        return (
-          <h3 key={index}>
-            <item>
-              {item.name}-{item.age}
-            </item>
-          </h3>
-        );
-      })}
+      <h1>useActionState Hook in React 19</h1>
+      <form action={action}>
+        <input type="text" name="name" placeholder="Enter name" />
+        <br />
+        <br />
+        <input type="password" name="password" placeholder="Enter password" />
+        <br />
+        <br />
+        <button disabled={pending}>
+          {pending ? "Submitting..." : "Submit Data"}
+        </button>
+        <br />
+        <br />
+        {data.error && <span style={{ color: "red" }}>{data.error}</span>}
+        {data.message && <span style={{ color: "green" }}>{data.message}</span>}
+
+        <h2>Name: {data.name || ""}</h2>
+        <h2>Password: {data.password || ""}</h2>
+      </form>
     </div>
   );
 }
+
 export default App;
