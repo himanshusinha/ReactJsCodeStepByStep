@@ -11,22 +11,30 @@ function App() {
     if (name && password) {
       return { message: "Data Submitted", name, password };
     } else {
-      return { error: "Failed to Submit. Enter proper data" };
+      return { error: "Failed to Submit. Enter proper data", name, password };
     }
   };
 
   const [data, action, pending] = useActionState(handleSubmit, {});
 
-  console.log("Form state:", data);
-
   return (
     <div>
       <h1>useActionState Hook in React 19</h1>
       <form action={action}>
-        <input type="text" name="name" placeholder="Enter name" />
+        <input
+          defaultValue={data?.name}
+          type="text"
+          name="name"
+          placeholder="Enter name"
+        />
         <br />
         <br />
-        <input type="password" name="password" placeholder="Enter password" />
+        <input
+          defaultValue={data?.password}
+          type="password"
+          name="password"
+          placeholder="Enter password"
+        />
         <br />
         <br />
         <button disabled={pending}>
@@ -37,8 +45,8 @@ function App() {
         {data.error && <span style={{ color: "red" }}>{data.error}</span>}
         {data.message && <span style={{ color: "green" }}>{data.message}</span>}
 
-        <h2>Name: {data.name || ""}</h2>
-        <h2>Password: {data.password || ""}</h2>
+        <h4>Name: {data.name || ""}</h4>
+        <h4>Password: {data.password || ""}</h4>
       </form>
     </div>
   );
