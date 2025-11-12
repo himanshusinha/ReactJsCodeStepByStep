@@ -1,9 +1,10 @@
-function Student({ name }) {
+import SubjectComponent from "./Subject";
+
+export default function Student() {
   return (
-    <div>
-      <h1>{name}</h1>
+    <div style={{ backgroundColor: "violet", padding: "10px" }}>
+      <h1>Student Component</h1>
+      <SubjectComponent />
     </div>
   );
 }
-
-export default Student;
