@@ -1,24 +1,15 @@
-import { useState } from "react";
-import College from "./College";
-import { SubjectContext } from "./ContextData";
 import "./css/style.css";
+import useToggle from "./useToggle";
 
 function App() {
-  const [subject, setSubject] = useState("English");
+  const [value, toggleValue] = useToggle(true);
   return (
-    <SubjectContext.Provider value={subject}>
-      <select value={subject} onChange={(e) => setSubject(e.target.value)}>
-        <option value="">Select Subject</option>
-        <option value="Maths">Maths</option>
-        <option value="English">English</option>
-        <option value="History">History</option>
-      </select>
-      <div style={{ backgroundColor: "yellow", padding: 10 }}>
-        <h1>Context API</h1>
-        <button onClick={() => setSubject("")}>Reset</button>
-        <College />
-      </div>
-    </SubjectContext.Provider>
+    <div>
+      <button onClick={toggleValue}>Toggle Heading</button>
+      <button onClick={() => toggleValue(false)}>Hide Heading</button>
+      <button onClick={() => toggleValue(true)}>Show Heading</button>
+      {value ? <h1>Custom Hooks in React JS</h1> : null}
+    </div>
   );
 }
 
