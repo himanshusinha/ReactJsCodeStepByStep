@@ -1,34 +1,61 @@
 import { useState } from "react";
 import "./css/style.css";
 function App() {
-  const [data, setData] = useState({
-    name: "Anil",
-    address: {
-      city: "Delhi",
-      country: "India",
+  const [data, setData] = useState(["sam", "peter", "bob"]);
+  const [dataDetails, setDataDetails] = useState([
+    {
+      name: "sam",
+      age: 24,
     },
-  });
-  const handleData = (val) => {
-    data.name = val;
-    setData({ ...data });
+    {
+      name: "peter",
+      age: 33,
+    },
+    {
+      name: "bob",
+      age: 36,
+    },
+  ]);
+  const handleData = (name) => {
+    data[data.length - 1] = name;
+    console.log(data);
+    setData([...data]);
   };
-  const handleCity = (city) => {
-    console.log(city);
-    data.address.city = city;
-    setData({ ...data, address: { ...data.address } });
+  const handleDataDetails = (age) => {
+    dataDetails[dataDetails.length - 1].age = age;
+    console.log(dataDetails);
+    setDataDetails([...dataDetails]);
   };
   return (
     <div>
-      <h1>Updating Objects in ReactJS 19</h1>
+      <h1>Updating Array in ReactJS 19</h1>
       <input
         type="text"
-        placeholder="Entery name"
-        onChange={(event) => handleData(event.target.value)}
+        placeholder="enter your name"
+        onChange={(e) => handleData(e.target.value)}
       />
-      <h2>Name: {data.name}</h2>
-      <h2>City: {data.address.city}</h2>
-      <h2>Country: {data.address.country}</h2>
-      <input type="text" onChange={(event) => handleCity(event.target.value)} />
+      {data.map((item, index) => {
+        return (
+          <h3 key={index}>
+            <item>{item}</item>
+          </h3>
+        );
+      })}
+      <hr />
+      <input
+        type="text"
+        placeholder="enter your age"
+        onChange={(e) => handleDataDetails(e.target.value)}
+      />
+      {dataDetails.map((item, index) => {
+        return (
+          <h3 key={index}>
+            <item>
+              {item.name}-{item.age}
+            </item>
+          </h3>
+        );
+      })}
     </div>
   );
 }
